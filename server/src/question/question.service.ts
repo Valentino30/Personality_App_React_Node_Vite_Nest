@@ -16,8 +16,6 @@ export class QuestionService {
   }
 
   async addQuestion(question: Question): Promise<Question> {
-    console.log({ question });
-
     const newQuestion = new this.questionModel(question);
     await newQuestion.save();
     return newQuestion as Question;
