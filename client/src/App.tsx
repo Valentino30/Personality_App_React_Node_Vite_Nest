@@ -7,6 +7,8 @@ import "./App.css";
 
 function App() {
   const [offset, setOffset] = useState(0);
+  const [_answers, setAnswers] = useState<string[]>([]);
+  const [selectedAnswer, setSelectedAnswer] = useState("");
   const { isLoading: isLoadingQuestions, data: questions } =
     useGetPaginatedQuestions({ offset, limit: 1 });
 
@@ -15,9 +17,14 @@ function App() {
   );
 
   const handleClick = () => {
+    setAnswers((answers) => [...answers, selectedAnswer]);
     if (loadMoreQuestions) {
       setOffset((offset) => offset + 1);
     }
+  };
+
+  const handleCheck = (answer: string) => {
+    setSelectedAnswer(answer);
   };
 
   return (
@@ -30,9 +37,16 @@ function App() {
           {questions.questions.map((question: QuestionType) => (
             <li key={question.id}>
               <h3>{question.question}</h3>
-              <ul>
+              <ul style={{ listStyleType: "none", padding: 0 }}>
                 {question.answers.map((answer) => (
-                  <li key={answer}>{answer}</li>
+                  <li key={answer}>
+                    <input
+                      type="checkbox"
+                      checked={answer === selectedAnswer}
+                      onChange={() => handleCheck(answer)}
+                    />
+                    {answer}
+                  </li>
                 ))}
               </ul>
             </li>
