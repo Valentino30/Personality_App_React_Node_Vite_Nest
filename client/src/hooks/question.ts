@@ -12,6 +12,9 @@ export const useGetPaginatedQuestions = ({
     [QueryTokens.questions, offset],
     () => getPaginatedQuestionsRequest({ offset, limit }),
     {
+      select: (data) => {
+        return { ...data.questions[0], total: data.total };
+      },
       onError: () => {
         alert("Could not fetch questions 😞");
       },
