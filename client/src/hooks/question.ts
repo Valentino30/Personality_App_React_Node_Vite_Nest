@@ -1,12 +1,20 @@
 import { useQuery } from "react-query";
 
 import { QueryTokens } from "./tokens";
-import { getQuestionsRequest } from "../api/question";
+import { PaginationQueryType } from "../types/api";
+import { getPaginatedQuestionsRequest } from "../api/question";
 
-export const useGetQuestions = () => {
-  return useQuery(QueryTokens.questions, getQuestionsRequest, {
-    onError: () => {
-      alert("Could not fetch todos 😞");
-    },
-  });
+export const useGetPaginatedQuestions = ({
+  offset,
+  limit,
+}: PaginationQueryType) => {
+  return useQuery(
+    [QueryTokens.questions, offset],
+    () => getPaginatedQuestionsRequest({ offset, limit }),
+    {
+      onError: () => {
+        alert("Could not fetch questions 😞");
+      },
+    }
+  );
 };

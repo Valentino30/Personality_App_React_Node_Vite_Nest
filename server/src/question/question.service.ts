@@ -1,8 +1,8 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 
 import { Question } from './question.model';
-import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class QuestionService {
@@ -10,9 +10,13 @@ export class QuestionService {
     @InjectModel('Question') private readonly questionModel: Model<Question>,
   ) {}
 
-  async getQuestions(): Promise<Question[]> {
-    const questions = await this.questionModel.find();
-    return questions as Question[];
+  async getPaginatedQuestions({
+    offset,
+    limit,
+  }): Promise<{ questions: Question[]; total: number }> {
+    const total = await this.questionModel.count();
+    const questions = await this.questionModel.find().skip(offset).limit(limit);
+    return { questions, total };
   }
 
   async addQuestion(question: Question): Promise<Question> {

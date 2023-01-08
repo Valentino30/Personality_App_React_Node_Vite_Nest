@@ -1,6 +1,6 @@
-import { Get, Controller, Post, Body } from '@nestjs/common';
-import { Question } from './question.model';
+import { Get, Controller, Post, Body, Req } from '@nestjs/common';
 
+import { Question } from './question.model';
 import { QuestionService } from './question.service';
 
 @Controller('questions')
@@ -8,8 +8,8 @@ export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
   @Get()
-  async getQuestions() {
-    const questions = await this.questionService.getQuestions();
+  async getPaginatedQuestions(@Req() { query }) {
+    const questions = await this.questionService.getPaginatedQuestions(query);
     return questions;
   }
 

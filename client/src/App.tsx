@@ -1,10 +1,24 @@
+import { useState } from "react";
+
 import { QuestionType } from "./types/question";
-import { useGetQuestions } from "./hooks/question";
+import { useGetPaginatedQuestions } from "./hooks/question";
 
 import "./App.css";
 
 function App() {
-  const { isLoading: isLoadingQuestions, data: questions } = useGetQuestions();
+  const [offset, setOffset] = useState(0);
+  const { isLoading: isLoadingQuestions, data: questions } =
+    useGetPaginatedQuestions({ offset, limit: 1 });
+
+  const loadMoreQuestions = !(
+    questions?.total && questions.total === offset + 1
+  );
+
+  const handleClick = () => {
+    if (loadMoreQuestions) {
+      setOffset((offset) => offset + 1);
+    }
+  };
 
   return (
     <div className="App">
@@ -13,7 +27,7 @@ function App() {
         <h2>Loading questions...</h2>
       ) : (
         <ul style={{ listStyleType: "none", textAlign: "left" }}>
-          {questions.map((question: QuestionType) => (
+          {questions.questions.map((question: QuestionType) => (
             <li key={question.id}>
               <h3>{question.question}</h3>
               <ul>
@@ -25,6 +39,9 @@ function App() {
           ))}
         </ul>
       )}
+      <button onClick={handleClick}>
+        {loadMoreQuestions ? "Next Question" : "Get Results"}
+      </button>
     </div>
   );
 }
