@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Results() {
   const personalities = [
     "Director 😎",
@@ -14,6 +16,9 @@ export default function Results() {
       <p>
         Turns out you are a <strong>{personality}</strong>
       </p>
+      <Link to="/">
+        <button>Retake Test</button>
+      </Link>
     </div>
   );
 }
