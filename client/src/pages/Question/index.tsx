@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useGetPaginatedQuestions } from "../../hooks/question";
 
-export default function Test() {
+export default function Question() {
   const navigate = useNavigate();
   const [offset, setOffset] = useState(0);
   const [_answers, setAnswers] = useState<string[]>([]);
