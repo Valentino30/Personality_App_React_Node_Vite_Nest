@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { useQuery } from "react-query";
 
 import { QueryTokens } from "./tokens";
@@ -16,7 +17,7 @@ export const useGetPaginatedQuestions = ({
         return { ...data.questions[0], total: data.total };
       },
       onError: () => {
-        alert("Could not fetch questions 😞");
+        toast.error("Could not fetch questions 😞");
       },
     }
   );

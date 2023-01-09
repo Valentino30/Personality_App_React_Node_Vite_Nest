@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useGetPaginatedQuestions } from "../../hooks/question";
 
@@ -28,13 +28,13 @@ export default function Question() {
     }
   };
 
+  if (isLoadingQuestions) return <h2>Loading questions...</h2>;
+
   return (
-    <div>
-      <h1>Question {offset + 1}</h1>
-      {isLoadingQuestions ? (
-        <h2>Loading questions...</h2>
-      ) : (
+    <>
+      {question ? (
         <>
+          <h1>Question {offset + 1}</h1>
           <div style={{ textAlign: "left" }}>
             <h3>{question.question}</h3>
             <ul style={{ listStyleType: "none", padding: 0 }}>
@@ -55,7 +55,14 @@ export default function Question() {
             {loadMoreQuestions ? "Next Question" : "Get Results"}
           </button>
         </>
+      ) : (
+        <>
+          <h2>Oops! Something went wrong 🙈</h2>
+          <Link to="/">
+            <button>Go Back</button>
+          </Link>
+        </>
       )}
-    </div>
+    </>
   );
 }

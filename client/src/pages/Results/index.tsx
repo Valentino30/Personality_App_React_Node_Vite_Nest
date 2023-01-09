@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Results() {
   const personalities = [
@@ -8,6 +10,10 @@ export default function Results() {
     "Socializer 🥳",
   ];
   const personality = personalities[Math.floor(Math.random() * 4)];
+
+  useEffect(() => {
+    toast.success("Test Completed! 🎉");
+  }, []);
 
   return (
     <div>
