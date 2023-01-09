@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import List from "../../components/List";
+import Header from "../../components/Header";
+import Button from "../../components/Button";
+import CheckBox from "../../components/Checkbox";
+import ListItem from "../../components/ListItem";
+import Container from "../../components/Container";
+import ButtonLink from "../../components/ButtonLink";
 
 import { useGetPaginatedQuestions } from "../../hooks/question";
 
@@ -28,39 +36,35 @@ export default function Question() {
     }
   };
 
-  if (isLoadingQuestions) return <h2>Loading questions...</h2>;
+  if (isLoadingQuestions) return <Header as="h2">Loading questions...</Header>;
 
   return (
     <>
       {question ? (
         <>
-          <h1>Question {offset + 1}</h1>
-          <div style={{ textAlign: "left" }}>
-            <h3>{question.question}</h3>
-            <ul style={{ listStyleType: "none", padding: 0 }}>
+          <Header>{`Question ${offset + 1}`}</Header>
+          <Container align="left">
+            <Header as="h3">{question.question}</Header>
+            <List>
               {question.answers.map((answer: string) => (
-                <li key={answer}>
-                  <input
-                    type="checkbox"
-                    style={{ cursor: "pointer" }}
+                <ListItem key={answer}>
+                  <CheckBox
                     checked={answer === selectedAnswer}
                     onChange={() => handleCheck(answer)}
                   />
                   {answer}
-                </li>
+                </ListItem>
               ))}
-            </ul>
-          </div>
-          <button onClick={handleClick} disabled={!selectedAnswer}>
+            </List>
+          </Container>
+          <Button onClick={handleClick} disabled={!selectedAnswer}>
             {loadMoreQuestions ? "Next Question" : "Get Results"}
-          </button>
+          </Button>
         </>
       ) : (
         <>
-          <h2>Oops! Something went wrong 🙈</h2>
-          <Link to="/">
-            <button>Go Back</button>
-          </Link>
+          <Header as="h2">Oops! Something went wrong 🙈</Header>
+          <ButtonLink to="/">Go Back</ButtonLink>
         </>
       )}
     </>

@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
+import Header from "../../components/Header";
+import ButtonLink from "../../components/ButtonLink";
 
 export default function Landing() {
   return (
-    <div>
-      <h1>Eager to discover your personality?</h1>
-      <Link to="/questions">
-        <button>Take Personality Test</button>
-      </Link>
-    </div>
+    <>
+      <Header>Eager to discover your personality?</Header>
+      <ButtonLink to="/questions">Take Personality Test</ButtonLink>
+    </>
   );
 }

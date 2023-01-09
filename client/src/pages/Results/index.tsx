@@ -1,6 +1,10 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import Text from "../../components/Text";
+import Header from "../../components/Header";
+import Container from "../../components/Container";
+import ButtonLink from "../../components/ButtonLink";
 
 export default function Results() {
   const personalities = [
@@ -16,15 +20,13 @@ export default function Results() {
   }, []);
 
   return (
-    <div>
-      <h1>You got it!</h1>
-      <p>Congrats you've just completed your personality test!</p>
-      <p>
+    <Container>
+      <Header>You got it!</Header>
+      <Text>Congrats you've just completed your personality test!</Text>
+      <Text>
         Turns out you are a <strong>{personality}</strong>
-      </p>
-      <Link to="/">
-        <button>Retake Test</button>
-      </Link>
-    </div>
+      </Text>
+      <ButtonLink to="/">Retake Test</ButtonLink>
+    </Container>
   );
 }
