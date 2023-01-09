@@ -1,8 +1,8 @@
 import { StyledInput } from "./styles";
 
 type CheckBoxProps = {
-  onChange: () => void;
-  checked: boolean;
+  onChange?: () => void;
+  checked?: boolean;
 };
 
 export default function CheckBox({ checked, onChange }: CheckBoxProps) {

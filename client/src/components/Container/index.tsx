@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { StyledDiv } from "./styles";
 
 type ContainerProps = {
-  children: ReactNode;
+  children?: ReactNode;
   align?: "left" | "center" | "right";
 };
 
