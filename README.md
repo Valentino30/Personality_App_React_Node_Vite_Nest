@@ -9,7 +9,7 @@ This is a simple personality test app built in Typescript using React & Node.
 - Add a .env file in the server folder following the structure of the .env.example 
 - Add your mongo uri to the newly created .env file 
 - Type `yarn start:dev` in the server folder launch the server
-- Type `yarn start` in the client folder to launch the client
+- Type `yarn dev` in the client folder to launch the client
 - Type `yarn test` in the client folder to run the client's unit test suite
 - Type `yarn cypress` in the client folder to run the client's e2e test suite
 
