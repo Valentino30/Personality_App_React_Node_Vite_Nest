@@ -6,7 +6,7 @@ import ListItem from "../ListItem";
 
 describe("List Component", () => {
   let list: HTMLUListElement;
-  let listItems: HTMLLIElement;
+  let listItems: HTMLLIElement[];
 
   it("Renders correctly", () => {
     render(<List />);
@@ -23,7 +23,7 @@ describe("List Component", () => {
       </List>
     );
     list = screen.getByRole("list");
-    listItems = screen.getByRole("list");
+    listItems = screen.getAllByRole("listitem");
     expect(list).toBeInTheDocument();
     expect(listItems).toHaveLength(3);
   });
